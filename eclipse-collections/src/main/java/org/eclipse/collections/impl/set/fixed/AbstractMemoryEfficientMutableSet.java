@@ -136,6 +136,9 @@ abstract class AbstractMemoryEfficientMutableSet<T>
         @Override
         public T next()
         {
+			if (!hasNext()) {
+				throw new java.util.NoSuchElementException();
+			}
             return this.getElement(this.next++);
         }
 

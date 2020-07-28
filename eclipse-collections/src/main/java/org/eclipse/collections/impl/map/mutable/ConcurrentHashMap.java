@@ -1586,6 +1586,9 @@ public final class ConcurrentHashMap<K, V>
         @Override
         public V next()
         {
+			if (!hasNext()) {
+				throw new java.util.NoSuchElementException();
+			}
             return this.nextEntry().value;
         }
     }
@@ -1595,6 +1598,9 @@ public final class ConcurrentHashMap<K, V>
         @Override
         public K next()
         {
+			if (!hasNext()) {
+				throw new java.util.NoSuchElementException();
+			}
             return this.nextEntry().getKey();
         }
 
@@ -1610,6 +1616,9 @@ public final class ConcurrentHashMap<K, V>
         @Override
         public Map.Entry<K, V> next()
         {
+			if (!hasNext()) {
+				throw new java.util.NoSuchElementException();
+			}
             return this.nextEntry();
         }
 

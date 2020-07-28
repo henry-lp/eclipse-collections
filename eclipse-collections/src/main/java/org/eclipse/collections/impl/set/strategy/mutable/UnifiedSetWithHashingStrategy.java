@@ -2638,6 +2638,9 @@ public class UnifiedSetWithHashingStrategy<T>
             @Override
             public RootUnsortedSetBatch<T> next()
             {
+				if (!hasNext()) {
+					throw new java.util.NoSuchElementException();
+				}
                 int chunkStartIndex = this.chunkIndex * UnifiedSetParallelUnsortedIterable.this.batchSize;
                 int chunkEndIndex = (this.chunkIndex + 1) * UnifiedSetParallelUnsortedIterable.this.batchSize;
                 int truncatedChunkEndIndex = Math.min(chunkEndIndex, UnifiedSetWithHashingStrategy.this.table.length);

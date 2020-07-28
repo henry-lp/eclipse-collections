@@ -72,6 +72,9 @@ public class CollectBooleanToObjectIterable<V> extends AbstractLazyIterable<V>
 
             public V next()
             {
+				if (!hasNext()) {
+					throw new java.util.NoSuchElementException();
+				}
                 return CollectBooleanToObjectIterable.this.function.valueOf(this.iterator.next());
             }
 

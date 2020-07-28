@@ -387,6 +387,9 @@ final class ImmutableTreeSet<T>
             @Override
             public RootSortedSetBatch<T> next()
             {
+				if (!hasNext()) {
+					throw new java.util.NoSuchElementException();
+				}
                 int chunkStartIndex = this.chunkIndex * SortedSetIterableParallelIterable.this.getBatchSize();
                 int chunkEndIndex = (this.chunkIndex + 1) * SortedSetIterableParallelIterable.this.getBatchSize();
                 int truncatedChunkEndIndex = Math.min(chunkEndIndex, ImmutableTreeSet.this.size());

@@ -141,6 +141,9 @@ public final class ListIterableParallelIterable<T> extends AbstractParallelListI
         @Override
         public RootListBatch<T> next()
         {
+			if (!hasNext()) {
+				throw new java.util.NoSuchElementException();
+			}
             int chunkStartIndex = this.chunkIndex * ListIterableParallelIterable.this.getBatchSize();
             int chunkEndIndex = (this.chunkIndex + 1) * ListIterableParallelIterable.this.getBatchSize();
             int truncatedChunkEndIndex = Math.min(chunkEndIndex, ListIterableParallelIterable.this.delegate.size());

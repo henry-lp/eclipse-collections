@@ -110,6 +110,9 @@ public class ReverseIterable<T>
         @Override
         public T next()
         {
+			if (!hasNext()) {
+				throw new java.util.NoSuchElementException();
+			}
             return this.listIterator.previous();
         }
 
