@@ -158,7 +158,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             throw new IllegalArgumentException("initial capacity cannot be less than 0");
         }
         this.hashingStrategy = hashingStrategy;
-        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(initialCapacity * OCCUPIED_DATA_RATIO));
+        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil((float) initialCapacity * OCCUPIED_DATA_RATIO));
         this.allocateTable(capacity);
     }
 
@@ -991,7 +991,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
     {
         this.hashingStrategy = (HashingStrategy<? super K>) in.readObject();
         int size = in.readInt();
-        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(size * OCCUPIED_DATA_RATIO));
+        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil((float) size * OCCUPIED_DATA_RATIO));
         this.allocateTable(capacity);
 
         for (int i = 0; i < size; i++)

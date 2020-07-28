@@ -144,7 +144,7 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
         {
             throw new IllegalArgumentException("initial capacity cannot be less than 0");
         }
-        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(initialCapacity * OCCUPIED_DATA_RATIO));
+        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil((float) initialCapacity * OCCUPIED_DATA_RATIO));
         this.allocateTable(capacity);
     }
 
@@ -984,7 +984,7 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
          * @deprecated in 5.1.0.
          */
         in.readFloat();
-        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(size * OCCUPIED_DATA_RATIO));
+        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil((float) size * OCCUPIED_DATA_RATIO));
         this.allocateTable(capacity);
         for (int i = 0; i < size; i++)
         {
