@@ -38,43 +38,13 @@ public final class FileUtils
             throw new IllegalStateException(outputFile.getAbsolutePath());
         }
         FileWriter fileWriter = null;
-        BufferedWriter bufferedWriter = null;
-        try
-        {
-            fileWriter = new FileWriter(outputFile);
-            bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(data);
-            bufferedWriter.flush();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException("Could not write generated sources to file: " + e);
-        }
-        finally
-        {
-            if (fileWriter != null)
-            {
-                try
-                {
-                    fileWriter.close();
-                }
-                catch (IOException e)
-                {
-                    throw new RuntimeException("Could not close filewriter: " + e);
-                }
-            }
-            if (bufferedWriter != null)
-            {
-                try
-                {
-                    bufferedWriter.close();
-                }
-                catch (IOException e)
-                {
-                    throw new RuntimeException("Could not close bufferedwriter: " + e);
-                }
-            }
-        }
+		try (java.io.BufferedWriter bufferedWriter = new java.io.BufferedWriter(fileWriter)) {
+			fileWriter = new java.io.FileWriter(outputFile);
+			bufferedWriter.write(data);
+			bufferedWriter.flush();
+		} catch (java.io.IOException e) {
+			throw new java.lang.RuntimeException("Could not write generated sources to file: " + e);
+		}
     }
 
     public static List<URL> getAllTemplateFilesFromClasspath(String templateDirectory, List<URL> classPathURLs)
